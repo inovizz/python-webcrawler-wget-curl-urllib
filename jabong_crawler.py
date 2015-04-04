@@ -6,14 +6,20 @@ class LibAccess(object):
 	def __init__(self,url):
 		self.url = url
 
-    #Downloading webpage content via wget
+	#Downloading webpage content via wget
 	def wget(self):
 		url = self.url
 		self.wget_data = os.popen('wget -qO- %s'% url).read()
 		return self.wget_data
 
-    #Downlaoding page content using python3 default library urllib
-    #To execute this use python3 as branch(python3 jabong_crawler.py)
+    #Downloading webpage content via curl
+	def curl(self):
+		url = self.url
+		self.curl_data = os.popen('curl -I %s'% url).read()
+		return self.curl_data
+
+	#Downlaoding page content using python3 default library urllib
+	#To execute this use python3 as branch(python3 jabong_crawler.py)
 	def url_lib(self):
 		self.urllib_data = urllib.request.urlopen(self.url).read()
 		return self.urllib_data
