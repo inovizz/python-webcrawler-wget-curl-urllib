@@ -81,7 +81,7 @@ class Spidering(LibAccess):
 			#pass
 			#url = "r%s"%url
 			url = re.sub(r"\\","",url)
-			if url in "^http":
+			if re.search(r'^http',url):
 				f1.write(url+"\n")
 			else:
 				url = re.sub(r"^","http://www.jabong.com",url)
@@ -107,10 +107,10 @@ class Spidering(LibAccess):
 					#pass
 					#url = "r%s"%url
 					url = re.sub(r"\\","",url)
-					if url in "^http":
+					if re.search(r'^http',url):
 						f2.write(url+"\n")
 					else:
-					#	url = re.sub(r"^","http://www.jabong.com",url)
+						url = re.sub(r"^","http://www.jabong.com",url)
 						f2.write(url+"\n")
 					#url = re.sub(r"^","http://www.jabong.com",url)
 					print (url)
@@ -129,6 +129,6 @@ sleep = 10
 scrap = Spidering()
 #Give seed url as parameter as it is compulsary to crawl the webpage
 scrap.wget("http://jabong.com")
-#scrap.category1(sleep)
-#scrap.ajaxCategories(sleep)
+scrap.category1(sleep)
+scrap.ajaxCategories(sleep)
 scrap.product(sleep)
