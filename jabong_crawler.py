@@ -17,8 +17,9 @@ class LibAccess(object):
 
 	#Downloading webpage content via curl
 	def curl(self):
-		url = self.url
-		self.curl_data = os.popen('curl -I %s'% url).read()
+		self.url = url
+		#curl --silent '$_' -H 'User-Agent: Mozilla/5.0 (Macintosh; In grep OS X 10.9; rv:24.0) Gecko/20100101 Firefox/24.0' 2>/dev/null
+		self.curl_data = os.popen('curl --silent %s -H User-Agent: Mozilla/5.0 (Macintosh; In grep OS X 10.9; rv:24.0) Gecko/20100101 Firefox/24.0 2>/dev/null'% url).read()
 		return self.curl_data
 
 	#Downlaoding page content using python3 default library urllib
@@ -227,8 +228,8 @@ sleep = 3
 #Creating objects via class
 scrap = ContentExtraction()
 #Give seed url as parameter as it is compulsary to crawl the webpage
-#scrap.wget("http://jabong.com")
-#scrap.category1(sleep)
-#scrap.ajaxCategories(sleep)
-#scrap.product(sleep)
+scrap.wget("http://jabong.com")
+scrap.category1(sleep)
+scrap.ajaxCategories(sleep)
+scrap.product(sleep)
 scrap.product_infomation(sleep)
