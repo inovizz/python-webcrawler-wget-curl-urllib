@@ -227,8 +227,8 @@ sleep = 3
 #Creating objects via class
 scrap = ContentExtraction()
 #Give seed url as parameter as it is compulsary to crawl the webpage
-scrap.wget("http://jabong.com")
-scrap.category1(sleep)
-scrap.ajaxCategories(sleep)
-scrap.product(sleep)
+#scrap.wget("http://jabong.com")
+#scrap.category1(sleep)
+#scrap.ajaxCategories(sleep)
+#scrap.product(sleep)
 scrap.product_infomation(sleep)
