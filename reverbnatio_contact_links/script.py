@@ -1,4 +1,4 @@
-from nltk import word_tokenize
+#from nltk import word_tokenize
 import glob
 import os, sys
 import re
@@ -23,7 +23,8 @@ def train_data_sets():
 	get_data(spam_nontkenized)
 
 def get_data(spam_nontkenized):
-	nprocs = 1000 # nprocs is the number of processes to run
+
+	nprocs = 100 # nprocs is the number of processes to run
 	ParsePool = Pool(nprocs)
 	#ParsePool.map(btl_test,url)
 	ParsedURLS = ParsePool.map(crawl_fb_again,spam_nontkenized)
