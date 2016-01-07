@@ -1,0 +1,14 @@
+my $emailaddress = $ARGV[0];
+my $page = `curl --silent 'https://www.linkedin.com/uas/login-submit' -H 'origin: https://www.linkedin.com' -H 'accept-encoding: gzip, deflate' -H 'accept-language: en-US,en;q=0.8' -H 'x-requested-with: XMLHttpRequest' -H 'x-isajaxform: 1' -H 'cookie: bcookie="v=2&7f91dd6c-278b-4e93-87f1-622a57d97e92"; bscookie="v=1&20151013061554015e679e-4487-464f-86c2-c8c323a077c5AQHjFZgs79k5SZChmRdUk0XCgijrAAOV"; visit="v=1&M"; oz_props_fetch_size1_193758893=15; wutan=tvlszlZDlODMoh1G1rrLtWrcLwihO83BnAn6RDSdALo=; L1c=5896cb41; share_setting=PUBLIC; sdsc=1%3A1SZM1shxDNbLt36wZwCgPgvN58iw%3D; L1e=203e6005; _ga=GA1.2.1232760116.1450865086; JSESSIONID="ajax:0748663782374868679"; _lipt=0_2YjFSU-XJh6E6IbH00m7WzVXq9GEUo6L3wYSIM9FUbACvmOmJgO1bGOSVt3_o1dh1pwmKBYoi_6sfv0TyNtmK98IQccPcuqowv0kpbFz2Zt4iCY8Z31xYpcoEN4glL6B9LWi1pxWj_ZXlBMghN5ZnLetMzlQtjx6vvIzA9nVpie_VpLjU0aXGqFPIcCB2p1HSjbxp0XtIQM-2GpgwGDa8dTvVgwLzPZWII-nYg1L4lFK4bBSAXJWMv2GdNIJ3cs9lJREomR_d_RANFA2GIPsEG1w_WDdnsb19pfXLZr064k9XFRRHcMOAWgCJdx2a9bMAeu_oAF8KPmy9UptWfJ8We3vR8UgHCW7Bq4WXtmX1d4AQdaHRyGS5OeGTKQcOIWsLYv7VDnh5BM7AxDv--_13rjljVvHySl7b3DECcjvCKDAyQgICLI3_-T2MpYSFaJCv-sOLq9nBkE27dEcmPH5-j; lidc="b=LGST05:g=7:u=1:i=1451834017:t=1451920417:s=AQFB_fF_pBs3ic9hrhrVHPjzr6VZC2bP"; RT=s=1451835604499&r=https%3A%2F%2Fwww.linkedin.com%2Fuas%2Flogin; leo_auth_token="GST:9OKeWcqZEwyJ-F1uakKe22eNip-vv5J5FiAsqpqZgyGv-FOFA5nFpV:1451835652:ed6a87368dc37f738eca21d52df3b3824322ed1a"; lang="v=2&lang=en-us"' -H 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36' -H 'content-type: application/x-www-form-urlencoded' -H 'accept: */*' -H 'referer: https://www.linkedin.com/uas/login' -H 'x-linkedin-tracedatacontext: X-LI-ORIGIN-UUID=FyDjKcr0JRSAyUpq+ioAAA==' --data 'isJsEnabled=true&source_app=&tryCount=&clickedSuggestion=false&session_key=moun_india%40yahoo.co.in&session_password=hanuman&signin=Sign%20In&session_redirect='$emailaddress'&trk=&loginCsrfParam=7f91dd6c-278b-4e93-87f1-622a57d97e92&fromEmail=&csrfToken=ajax%3A0748663782374868679&sourceAlias=0_7r5yezRXCiA_H0CRD8sf6DhOjTKUNps5xGTqeX8EEoi&client_ts=1451835663189&client_r=moun_india%40yahoo.co.in%3A618389639%3A107166812%3A544493709&client_output=-745498753&client_n=618389639%3A107166812%3A544493709&client_v=1.0.1' --cookie-jar ./somefile --compressed 2>/dev/null`;
+#print $page;
+my $filename = 'report.html';
+open(my $fh, '>', $filename) or die "Could not open file '$filename' $!";
+if ($page =~ m/redirectUrl/){
+   	my @nextLinks = $page =~ m{redirectUrl\"\:\"([^\"]*)\"}g;
+	foreach (@nextLinks) {
+			print $_."\n";
+        	my $pageSource = `curl --cookie ./somefile --silent '$_' -H 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36' 2>/dev/null`;
+        	print $pageSource;
+        	print $fh $pageSource;
+        }
+}
