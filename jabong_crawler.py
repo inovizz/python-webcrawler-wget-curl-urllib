@@ -122,7 +122,7 @@ class Spidering(LibAccess):
 
 
 #To extract the content from product pages with the extracted category urls
-class ContentExtraction(LibAccess):
+class ContentExtraction(Spidering):
 	
 	def product_infomation(self,sleep):
 		f1 = open('product_urls.txt','r')
